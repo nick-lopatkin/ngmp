@@ -4,9 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "babel-node": "babel-node --presets=env",
-    "start": "nodemon --exec npm run babel-node -- ./app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel . --out-dir dist --copy-files",
+    "prestart": "rimraf dist && npm run build",
+    "start": "node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon --exec babel-node app.js"
   },
   "author": "Mikalai Lapatkin <mikalai_lapatkin@epam.com>",
   "license": "ISC",
