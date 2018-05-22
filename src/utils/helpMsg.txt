@@ -1,0 +1,17 @@
+Help message:
+
+Parameters:
+
+--action=<action> [--file=<filename>]
+
+Actions:
+
+    --action=reverse (-a reverse) - reverse input string data
+
+    --action=transform (-a transform) - convert input string to uppercase
+
+    --action=output-file (-a output-file) - output data from file to console
+
+    --action=convert-from-file (-a convert-from-file) - convert file from CSV to JSON and output to console
+
+    --action=convert-to-file (-a convert-to-file) - convert file from CSV to JSON and output to file

@@ -4,13 +4,14 @@ import {
     Importer,
     Product,
     User,
-} from "./models/index";
+} from './models/index';
+import './utils/streams';
 
-console.log(config.name);
+// console.log(config.name);
 
-const product = new Product();
-const user = new User();
+// const product = new Product();
+// const user = new User();
 
-const dirWatcher = new DirWatcher();
-dirWatcher.watch('./src/data/', 2000);
-const importer = new Importer(dirWatcher);
+// const dirWatcher = new DirWatcher();
+// dirWatcher.watch('./src/data/', 2000);
+// const importer = new Importer(dirWatcher);

@@ -4,9 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "babel . --out-dir dist --copy-files",
-    "prestart": "rimraf dist && npm run build",
-    "start": "node dist/app.js",
+    "start": "babel-node src/app.js -a css-bundler --path=src/styles",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "nodemon --exec babel-node src/app.js"
   },
@@ -22,6 +20,10 @@
   },
   "dependencies": {
     "csv-parse": "^2.2.0",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "minimist": "^1.2.0",
+    "request": "^2.87.0",
+    "split2": "^2.2.0",
+    "through2": "^2.0.3"
   }
 }
