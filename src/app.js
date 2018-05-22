@@ -4,7 +4,7 @@ import {
     Importer,
     Product,
     User,
-} from "./models";
+} from "./models/index";
 
 console.log(config.name);
 
@@ -12,5 +12,5 @@ const product = new Product();
 const user = new User();
 
 const dirWatcher = new DirWatcher();
-dirWatcher.watch('./data/', 2000);
+dirWatcher.watch('./src/data/', 2000);
 const importer = new Importer(dirWatcher);
