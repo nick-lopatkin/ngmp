@@ -1,17 +1,15 @@
-import config from './config/config';
-import {
-    DirWatcher,
-    Importer,
-    Product,
-    User,
-} from './models/index';
-import './utils/streams';
+// import server from './http-servers/plain-text-server';
+// export default server;
+import express from 'express';
+import cookieParser from './middlewares/cookie-parser';
+import queryParser from './middlewares/query-parser';
+import router from './routes/routes';
 
-// console.log(config.name);
+const app = express();
 
-// const product = new Product();
-// const user = new User();
+app.use(cookieParser);
+app.use(queryParser);
 
-// const dirWatcher = new DirWatcher();
-// dirWatcher.watch('./src/data/', 2000);
-// const importer = new Importer(dirWatcher);
+app.use('/api', router);
+
+export default app;
