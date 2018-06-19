@@ -19,11 +19,15 @@
     "nodemon": "^1.17.3"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "csv-parse": "^2.2.0",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "minimist": "^1.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "request": "^2.87.0",
     "split2": "^2.2.0",
     "through2": "^2.0.3"
