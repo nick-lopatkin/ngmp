@@ -1,33 +1,138 @@
 import {Router} from 'express';
-import products from '../models/products';
-import users from '../models/users';
+import CitySchema from '../models/city/schema';
+import ProductSchema from '../models/product/schema';
+import UserSchema from '../models/user/schema';
+import productData from '../data/products';
+import userData from '../data/users';
 
 const router = new Router();
 
 router.route('/').get((req, res) => {
-    console.log('Home page');
     res.json({message: 'Home page'});
 });
+
 router.get('/products', (req, res) => {
-    console.log('ALL products');
-    res.json({products});
+    ProductSchema.find((err, products) => {
+        res.json({products});
+    });
 });
+
 router.get('/products/:id', (req, res) => {
-    console.log('SINGLE product');
-    res.json({product: products[req.params.id]});
+    ProductSchema.findById(req.params.id, (err, product) => {
+        res.json({product});
+    });
 });
+
 router.get('/products/:id/reviews', (req, res) => {
-    console.log('ALL reviews for a single product');
-    const reviews = products[req.params.id] && products[req.params.id].reviews;
-    res.json({reviews});
+    ProductSchema.findById(req.params.id, (err, product) => {
+        const reviews = product.reviews;
+        res.json({reviews});
+    });
 });
+
 router.post('/products', (req, res) => {
-    console.log('NEW product');
-    res.json({product: 'NEW'});
+    ProductSchema.insertMany(productData, (err, products) => {
+        if (err) {
+            res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.end(err.message);
+        }
+        res.status(201).json(products);
+    });
 });
+
+router.delete('/products/:id', (req, res) => {
+    ProductSchema.deleteOne({_id: req.params.id}, (err, product) => {
+        if (err) {
+            res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.end(err.message);
+        }
+        if (!product) {
+            res.sendStatus(404);
+        }
+        res.status(204).json(product);
+    });
+});
+
 router.get('/users', (req, res) => {
-    console.log('ALL users');
-    res.json({users});
+    UserSchema.find((err, users) => {
+        res.json({users});
+    });
+});
+
+router.get('/users/:id', (req, res) => {
+    UserSchema.findById(req.params.id, (err, user) => {
+        res.json({user});
+    });
+});
+
+router.post('/users', (req, res) => {
+    UserSchema.insertMany(userData, (err, users) => {
+        if (err) {
+            res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.end(err.message);
+        }
+        res.status(201).json(users);
+    });
+});
+
+router.delete('/users/:id', (req, res) => {
+    UserSchema.deleteOne({_id: req.params.id}, (err, user) => {
+        if (err) {
+            res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.end(err.message);
+        }
+        if (!user) {
+            res.sendStatus(404);
+        }
+        res.status(204).json(user);
+    });
+});
+
+router.get('/cities', (req, res) => {
+    CitySchema.find((err, cities) => {
+        res.json({cities});
+    });
+});
+
+router.get('/cities/:id', (req, res) => {
+    CitySchema.findById(req.params.id, (err, city) => {
+        res.json({city});
+    });
+});
+
+router.put('/cities/:id', (req, res) => {
+    CitySchema.update({_id: req.params.id}, req.body, (err, results) => {
+        if (err) {
+            res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.end(err.message);
+        }
+        if (results.n < 1) {
+            return CitySchema.create({...req.body, _id: req.params.id}, (err, city) => {
+                if (err) {
+                    res.writeHead(400, {'Content-Type': 'text/plain'});
+                    res.end(err.message);
+                }
+                res.status(201).json(city);
+            });
+        }
+        if (results.nModified < 1) {
+            return res.sendStatus(304);
+        }
+        res.json(results);
+    });
+});
+
+router.delete('/cities/:id', (req, res) => {
+    CitySchema.deleteOne({_id: req.params.id}, (err, city) => {
+        if (err) {
+            res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.end(err.message);
+        }
+        if (!city) {
+            res.sendStatus(404);
+        }
+        res.status(204).json(city);
+    });
 });
 
 export default router;

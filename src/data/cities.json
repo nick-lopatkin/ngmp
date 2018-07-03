@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "1",
+    "name": "Brest",
+    "country": "Belarus",
+    "capital": false,
+    "location": {
+      "lat": 52.097621,
+      "long": 23.734050
+    }
+  },
+  {
+    "_id": "2",
+    "name": "Gomel",
+    "country": "Belarus",
+    "capital": false,
+    "location": {
+      "lat": 52.441391,
+      "long": 30.987453
+    }
+  },
+  {
+    "_id": "3",
+    "name": "Minsk",
+    "country": "Belarus",
+    "capital": true,
+    "location": {
+      "lat": 53.906897,
+      "long": 27.589120
+    }
+  }
+]
